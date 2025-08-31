@@ -1,0 +1,20 @@
+name: build
+on: { workflow_dispatch, push: { branches: [main] }, pull_request }
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-24.04
+          - macos-15
+    name: nix (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5.0.0
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            extra-trusted-public-keys = magic-school-ai.cachix.org-1:EcAHj+Bu7cr7tnrIXr4W2hiSQMOvswmV/o8Qi9shmFQ=
+            extra-substituters = https://magic-school-ai.cachix.org
+      - run: nix --show-trace build .#magicschool
