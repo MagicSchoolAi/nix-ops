@@ -7,6 +7,7 @@ let
 in
 {
   inherit (final.jacobi) pog;
+  inherit (final.kwbauson) better-comma;
   magicschool = final.buildEnv {
     name = "magicschool";
     paths = (final.lib.flatten (attrValues j)) ++ (attrValues final.custom) ++
