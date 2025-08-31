@@ -1,0 +1,27 @@
+name: check for flake updates
+on: { workflow_dispatch, schedule: [cron: '0 0 * * *'] }
+jobs:
+  check-for-updates:
+    runs-on: ubuntu-24.04
+    env:
+      GITHUB_TOKEN: ${{ secrets.NIX_UPDATES_PAT }}
+    steps:
+      - uses: actions/checkout@v5.0.0
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            extra-substituters = https://cache.g7c.us https://magic-school-ai.cachix.org
+            extra-trusted-public-keys = cache.g7c.us:dSWpE2B5zK/Fahd7npIQWM4izRnVL+a4LiCAnrjdoFY= magic-school-ai.cachix.org-1:EcAHj+Bu7cr7tnrIXr4W2hiSQMOvswmV/o8Qi9shmFQ=
+      - run: nix flake update
+      - uses: peter-evans/create-pull-request@v7.0.8
+        id: pr
+        with:
+          author: MS-GitHub-Bot <github-bot@magicschool.ai>
+          committer: MS-GitHub-Bot <github-bot@magicschool.ai>
+          base: main
+          branch: updates-nix
+          commit-message: 'Update nix pin'
+          title: '[BOT-000]: nix updates'
+          token: ${{ secrets.NIX_UPDATES_PAT }}
+      - if: ${{ steps.pr.outputs.pull-request-number }}
+        run: gh pr merge --auto --squash ${{ steps.pr.outputs.pull-request-url }}

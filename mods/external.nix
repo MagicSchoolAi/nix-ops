@@ -1,0 +1,33 @@
+final: prev:
+let
+  inherit (final.lib.attrsets) attrValues;
+  j = with final.jacobi; {
+    inherit jfmt nixup nix_hash_magicschool nupdate_latest_github dtools ktools;
+  };
+in
+{
+  inherit (final.jacobi) pog;
+  magicschool = final.buildEnv {
+    name = "magicschool";
+    paths = (final.lib.flatten (attrValues j)) ++ (attrValues final.custom) ++
+    (with final; [
+      claude-code
+      codex
+      gh
+      git
+      gnused
+      jq
+      nixpkgs-fmt
+      nodejs_24
+      npm-check-updates
+      overmind
+      pnpm_10
+      stripe-cli
+      toybox
+      typescript
+    ]) ++
+    (with final.nodePackages; [
+      vercel
+    ]);
+  };
+} // j
