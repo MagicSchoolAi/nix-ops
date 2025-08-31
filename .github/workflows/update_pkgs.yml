@@ -1,5 +1,5 @@
 name: check for package updates
-on: { workflow_dispatch, schedule: [cron: '0 0 * * *'] }
+on: { workflow_dispatch, schedule: [cron: "0 0 * * *"] }
 jobs:
   update:
     strategy:
@@ -8,6 +8,8 @@ jobs:
         attrs:
           - attr: supabase-cli-stable
             cmd: nupdate_latest_github -- --owner supabase --repo cli
+          - attr: windwarden
+            cmd: nupdate_latest_github -- --owner MagicSchoolAi --repo windwarden
     runs-on: ubuntu-24.04
     env:
       GITHUB_TOKEN: ${{ secrets.NIX_UPDATES_PAT }}
@@ -26,8 +28,8 @@ jobs:
           committer: MS-GitHub-Bot <github-bot@magicschool.ai>
           base: main
           branch: updates-${{ matrix.attrs.attr }}
-          commit-message: 'Update nix pin'
-          title: '[BOT-000]: pkg updates ${{ matrix.attrs.attr }}'
+          commit-message: "Update pkg ${matrix.attrs.attr}"
+          title: "[BOT-000]: pkg updates ${{ matrix.attrs.attr }}"
           token: ${{ secrets.NIX_UPDATES_PAT }}
       - if: ${{ steps.pr.outputs.pull-request-number }}
         run: gh pr merge --auto --squash ${{ steps.pr.outputs.pull-request-url }}
