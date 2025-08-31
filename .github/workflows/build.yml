@@ -1,5 +1,5 @@
 name: build
-on: { workflow_dispatch, push: { branches: [main] }, pull_request }
+on: { workflow_dispatch, push: { branches: [main] }, pull_request, merge_group: { types: [checks_requested] } }
 jobs:
   build:
     strategy:
@@ -15,6 +15,11 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           extra_nix_config: |
-            extra-trusted-public-keys = magic-school-ai.cachix.org-1:EcAHj+Bu7cr7tnrIXr4W2hiSQMOvswmV/o8Qi9shmFQ=
-            extra-substituters = https://magic-school-ai.cachix.org
+            extra-trusted-public-keys = magic-school-ai.cachix.org-1:EcAHj+Bu7cr7tnrIXr4W2hiSQMOvswmV/o8Qi9shmFQ= cache.g7c.us:dSWpE2B5zK/Fahd7npIQWM4izRnVL+a4LiCAnrjdoFY=
+            extra-substituters = https://magic-school-ai.cachix.org https://cache.g7c.us
+      - uses: cachix/cachix-action@master
+        if: github.ref == 'refs/heads/main' || contains(github.ref, 'updates-nix')
+        with:
+          name: magic-school-ai
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix --show-trace build .#magicschool
