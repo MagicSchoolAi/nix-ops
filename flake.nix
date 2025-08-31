@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     jacobi.url = "github:jpetrucciani/nix";
+    kwbauson.url = "github:kwbauson/cfg";
   };
   outputs = { self, ... }:
     let
