@@ -2,7 +2,7 @@ final: prev:
 let
   inherit (final.lib.attrsets) attrValues;
   j = with final.jacobi; {
-    inherit jfmt nixup nix_hash_magicschool nupdate_latest_github dtools ktools nixcache;
+    inherit jfmt nixup nix_hash_magicschool nupdate_latest_github dtools ktools nixcache terraform_1-5-5;
   };
 in
 {
