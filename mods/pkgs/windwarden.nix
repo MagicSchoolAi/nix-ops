@@ -22,6 +22,5 @@ rustPlatform.buildRustPackage rec {
     description = "A CLI tool for linting Tailwind";
     homepage = "https://github.com/MagicSchoolAi/windwarden";
     license = licenses.mit;
-    maintainers = with maintainers; [ benaduggan ];
   };
 }
