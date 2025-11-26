@@ -12,7 +12,6 @@ in
     name = "magicschool";
     paths = (final.lib.flatten (attrValues j)) ++ (attrValues final.custom) ++
     (with final; [
-      claude-code
       codex
       gh
       git
