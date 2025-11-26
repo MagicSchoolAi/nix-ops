@@ -6,7 +6,6 @@ let
   jq = "${pkgs.jq}/bin/jq";
   sed = "${pkgs.gnused}/bin/sed";
   nix-prefetch-url = "${pkgs.nix}/bin/nix-prefetch-url";
-  nix-update = "${pkgs.nix-update}/bin/nix-update";
 in
 pog {
   name = "nupdate_claude_code";

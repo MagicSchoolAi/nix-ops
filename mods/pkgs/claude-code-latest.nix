@@ -4,7 +4,7 @@
 , fetchurl
 , nodejs_22
 , cacert
-, writeShellScriptBin
+
 }:
 
 let
