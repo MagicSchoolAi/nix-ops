@@ -8,11 +8,11 @@
 }:
 
 let
-  version = "2.1.4";
+  version = "2.1.5";
 
   claudeCodeTarball = fetchurl {
     url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
-    sha256 = "0wfpig6s5zwxzf2rhsh2n9jvn6b969d8zw3p9qpzz36mmgsc64c1";
+    sha256 = "0lpd1kq5sanx764j4rvbgki5ljsbc6ygip716b4c17s6mf88d5d4";
   };
 in
 stdenv.mkDerivation {
