@@ -25,9 +25,6 @@ in
       stripe-cli
       toybox
       typescript
-    ]) ++
-    (with final.nodePackages; [
-      vercel
     ]);
   };
 } // j
