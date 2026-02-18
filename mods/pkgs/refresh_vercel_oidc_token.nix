@@ -1,4 +1,4 @@
-{ pkgs, nodePackages, vercel ? nodePackages.vercel, pog, ... }:
+{ pkgs, vercel ? pkgs.vercel-cli, pog, ... }:
 let
   _vercel = "${vercel}/bin/vercel";
   jq = "${pkgs.jq}/bin/jq";
