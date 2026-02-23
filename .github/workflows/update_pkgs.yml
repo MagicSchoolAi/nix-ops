@@ -12,6 +12,8 @@ jobs:
             cmd: nupdate_latest_github -- --owner MagicSchoolAi --repo windwarden
           - attr: claude-code-latest
             cmd: nupdate_claude_code
+          - attr: vercel-cli
+            cmd: nupdate_vercel_cli
     runs-on: ubuntu-24.04
     env:
       GITHUB_TOKEN: ${{ secrets.NIX_UPDATES_PAT }}
