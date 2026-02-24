@@ -31,7 +31,7 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            You are a Nix expert reviewing PR #${{ github.event.pull_request.number || github.event.issue.number }} in the nix-ops repository.
+            You are a Nix expert reviewing PR #${{ github.event.pull_request.number || github.event.issue.number }} in ${{ github.repository }}.
 
             This repo defines the MagicSchool developer environment — a broken build blocks every engineer's `direnv` shell.
             It builds on both Ubuntu 24.04 and macOS 15, and uses Cachix for binary caching.
