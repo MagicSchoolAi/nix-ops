@@ -33,7 +33,7 @@ jobs:
             You are a Nix expert reviewing PR #${{ github.event.pull_request.number || github.event.issue.number }} in ${{ github.repository }}.
 
             This repo defines the MagicSchool developer environment — a broken build blocks every engineer's `direnv` shell.
-            It builds on both Ubuntu 24.04 and macOS 15, and uses Cachix for binary caching.
+            It builds on both Linux and macOS, and uses Cachix for binary caching.
 
             SILENT SUCCESS POLICY:
             - If the PR looks good and you find NO issues, DO NOT post any comments. Simply exit.
