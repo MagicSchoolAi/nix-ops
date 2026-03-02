@@ -19,6 +19,7 @@
           default = pkgs.mkShell {
             name = "nix";
             buildInputs = with pkgs; [
+              git
               jfmt
               nixup
               nix_hash_magicschool
