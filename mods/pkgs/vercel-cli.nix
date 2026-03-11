@@ -1,9 +1,9 @@
 { lib, stdenv, fetchurl, nodejs_22, makeWrapper }:
 let
-  version = "50.29.0";
+  version = "50.31.0";
   src = fetchurl {
     url = "https://registry.npmjs.org/vercel/-/vercel-${version}.tgz";
-    sha256 = "103fmi8a4p7cmkjm4ysbn3zxlxrkyhdrvybwzjcqqh21n330pwad";
+    sha256 = "1krkcqski010vfq1qcky8rdbhvskd85fi4z2lv7ccxav872bm7gy";
   };
 in
 stdenv.mkDerivation {
