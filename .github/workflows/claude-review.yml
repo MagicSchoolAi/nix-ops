@@ -72,6 +72,6 @@ jobs:
             View the diff with `gh pr diff`. The branch is checked out.
             If responding to a specific @mention, ignore the silent policy and answer the question directly.
           claude_args: |
-            --max-turns 6
+            --max-turns 10
             --model claude-sonnet-4-6
             --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
