@@ -7,6 +7,13 @@ let
     sha256 = "1dkvkcr0yfbj7jbd5j0spadkflwv3w22b66kzq1agwab09bb0bjv";
   };
 
+  depsHash = {
+    x86_64-linux = "sha256-zXyrzYTbuIfOl5fC1sdd7Znh4fbh3VSNSkuaIGemaTE=";
+    aarch64-linux = "sha256-zXyrzYTbuIfOl5fC1sdd7Znh4fbh3VSNSkuaIGemaTE=";
+    x86_64-darwin = "sha256-Ta0lMArVcKpMIxaLrIMTCexuilewa3oDW2e9FSJSl8g=";
+    aarch64-darwin = "sha256-Ta0lMArVcKpMIxaLrIMTCexuilewa3oDW2e9FSJSl8g=";
+  };
+
   deps = stdenv.mkDerivation {
     pname = "vercel-cli-deps";
     inherit version;
@@ -36,7 +43,7 @@ let
 
     outputHashAlgo = "sha256";
     outputHashMode = "recursive";
-    outputHash = "sha256-Ta0lMArVcKpMIxaLrIMTCexuilewa3oDW2e9FSJSl8g=";
+    outputHash = depsHash.${stdenv.hostPlatform.system};
   };
 in
 stdenv.mkDerivation {
