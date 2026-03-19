@@ -6,6 +6,7 @@ let
   jq = "${pkgs.jq}/bin/jq";
   sed = "${pkgs.gnused}/bin/sed";
   nix-prefetch-url = "${pkgs.nix}/bin/nix-prefetch-url";
+  nix-build = "${pkgs.nix}/bin/nix-build";
 in
 pog {
   name = "nupdate_vercel_cli";
@@ -64,18 +65,18 @@ pog {
     ${sed} -i 's|outputHash = "sha256-[^"]*"|outputHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="|' "$PACKAGE_NIX"
 
     green "Updated $PACKAGE_NIX to version $latest_version"
-    yellow "NOTE: outputHash has been cleared. Run 'nix-build -A vercel-cli' to get the correct hash, then update it."
+    yellow "NOTE: outputHash has been cleared. Run '${nix-build} -A vercel-cli' to get the correct hash, then update it."
 
     # Attempt to build and extract the correct hash
     green "Building to compute deps hash..."
-    correct_hash=$(nix-build -A vercel-cli 2>&1 | ${sed} -n 's/.*got:    \(sha256-[^ ]*\)/\1/p')
+    correct_hash=$(${nix-build} -A vercel-cli 2>&1 | ${sed} -n 's/.*got:    \(sha256-[^ ]*\)/\1/p')
     if [ -n "$correct_hash" ]; then
       green "Computed deps hash: $correct_hash"
       ${sed} -i "s|outputHash = \"sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\"|outputHash = \"$correct_hash\"|" "$PACKAGE_NIX"
 
       # Verify the build succeeds
       green "Verifying build..."
-      if nix-build -A vercel-cli >/dev/null 2>&1; then
+      if ${nix-build} -A vercel-cli >/dev/null 2>&1; then
         green "Build succeeded!"
       else
         die "Build failed after setting hash. Manual intervention needed." 1
