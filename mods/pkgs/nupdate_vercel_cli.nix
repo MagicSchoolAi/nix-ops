@@ -61,7 +61,7 @@ pog {
 
     # Clear the deps outputHash so the next build computes the correct one
     # The build will fail with the correct hash, which must be substituted
-    ${sed} -i 's|outputHash = "sha256-[^"]*"|outputHash = ""|' "$PACKAGE_NIX"
+    ${sed} -i 's|outputHash = "sha256-[^"]*"|outputHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="|' "$PACKAGE_NIX"
 
     green "Updated $PACKAGE_NIX to version $latest_version"
     yellow "NOTE: outputHash has been cleared. Run 'nix-build -A vercel-cli' to get the correct hash, then update it."
@@ -71,7 +71,7 @@ pog {
     correct_hash=$(nix-build -A vercel-cli 2>&1 | ${sed} -n 's/.*got:    \(sha256-[^ ]*\)/\1/p')
     if [ -n "$correct_hash" ]; then
       green "Computed deps hash: $correct_hash"
-      ${sed} -i "s|outputHash = \"\"|outputHash = \"$correct_hash\"|" "$PACKAGE_NIX"
+      ${sed} -i "s|outputHash = \"sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\"|outputHash = \"$correct_hash\"|" "$PACKAGE_NIX"
 
       # Verify the build succeeds
       green "Verifying build..."
