@@ -11,6 +11,8 @@ buildNpmPackage {
     sha256 = "1dkvkcr0yfbj7jbd5j0spadkflwv3w22b66kzq1agwab09bb0bjv";
   };
 
+  # TODO: When nixpkgs is updated to a version supporting `packageLock`,
+  # replace this `postPatch` copy with the `packageLock` attribute instead.
   postPatch = ''
     cp ${./vercel-cli-lock.json} package-lock.json
     ${nodejs_22}/bin/node -e "
