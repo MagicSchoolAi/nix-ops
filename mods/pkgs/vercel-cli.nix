@@ -1,6 +1,5 @@
 { lib, buildNpmPackage, fetchurl, nodejs_22, makeWrapper }:
 let
-<<<<<<< updates-nix-vercel-cli
   version = "50.34.2";
 =======
   version = "50.33.1";
