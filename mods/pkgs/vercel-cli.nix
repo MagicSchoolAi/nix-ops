@@ -6,9 +6,13 @@ buildNpmPackage {
   inherit version;
 
   inherit version;
+let
+  version = "50.34.2";
+in
+buildNpmPackage {
+  pname = "vercel-cli";
+  inherit version;
 
->>>>>>> main
-  src = fetchurl {
     url = "https://registry.npmjs.org/vercel/-/vercel-${version}.tgz";
     sha256 = "0hi306p48aymvc144q0jzvmbdi08rbmdg1yd0y3zx1389kslqpmh";
   };
