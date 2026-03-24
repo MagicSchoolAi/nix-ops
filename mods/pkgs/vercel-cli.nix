@@ -1,6 +1,6 @@
 { lib, buildNpmPackage, fetchurl, nodejs_22, makeWrapper }:
 let
-  version = "50.33.1";
+  version = "50.35.0";
 in
 buildNpmPackage {
   pname = "vercel-cli";
@@ -8,7 +8,7 @@ buildNpmPackage {
 
   src = fetchurl {
     url = "https://registry.npmjs.org/vercel/-/vercel-${version}.tgz";
-    sha256 = "1dkvkcr0yfbj7jbd5j0spadkflwv3w22b66kzq1agwab09bb0bjv";
+    sha256 = "17srrszijrhk2mj8964njv82gjqmi2ckvfw07xhk3bxmki1dyisi";
   };
 
   # TODO: When nixpkgs is updated to a version supporting `packageLock`,
@@ -22,7 +22,7 @@ buildNpmPackage {
     "
   '';
 
-  npmDepsHash = "sha256-DCH64gt9DPMtHfSKRZzoI6FJG/nuBwD4hT+TWvp7ym4=";
+  npmDepsHash = "sha256-4U9jfAwOnq8sbVlPibTOUkr7FDZWMt7WADy5xxf+hVk=";
 
   nodejs = nodejs_22;
   dontNpmBuild = true;
