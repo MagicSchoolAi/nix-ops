@@ -1,5 +1,4 @@
 { lib, buildNpmPackage, fetchurl, nodejs_22, makeWrapper }:
-{ lib, buildNpmPackage, fetchurl, nodejs_22, makeWrapper }:
 let
   version = "50.34.2";
 in
@@ -8,13 +7,6 @@ buildNpmPackage {
   inherit version;
 
   src = fetchurl {
-let
-  version = "50.34.2";
-in
-buildNpmPackage {
-  pname = "vercel-cli";
-  inherit version;
-
     url = "https://registry.npmjs.org/vercel/-/vercel-${version}.tgz";
     sha256 = "0hi306p48aymvc144q0jzvmbdi08rbmdg1yd0y3zx1389kslqpmh";
   };
