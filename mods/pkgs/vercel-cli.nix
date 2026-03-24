@@ -1,11 +1,10 @@
 { lib, buildNpmPackage, fetchurl, nodejs_22, makeWrapper }:
-let
   version = "50.34.2";
-=======
-  version = "50.33.1";
 in
 buildNpmPackage {
   pname = "vercel-cli";
+  inherit version;
+
   inherit version;
 
 >>>>>>> main
