@@ -87,6 +87,6 @@ jobs:
           additional_permissions: |
             actions: read
           claude_args: |
-            --model claude-fable-5
+            --model claude-opus-4-8
             --allowedTools "mcp__github_inline_comment__create_inline_comment"
             --append-system-prompt "${{ steps.format-spec.outputs.content }}"
