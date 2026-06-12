@@ -9,16 +9,21 @@
 
 buildGoModule rec {
   pname = "supabase-cli-stable";
-  version = "2.98.2";
+  version = "2.102.0";
 
   src = fetchFromGitHub {
     owner = "supabase";
     repo = "cli";
     rev = "v${version}";
-    hash = "sha256-ZiptplUqebmId7noXuVXu9G5y1SW8+FGV6WqPH8R3Cw=";
+    hash = "sha256-vJCAem5qAiF9H2xYe8r1lE56W4k60VgNFcTFPY9xP9I=";
   };
 
-  vendorHash = "sha256-2BIP500MgABRzsG13UaUVv8KKtA0dPM0U10Uk/rfVQY=";
+  # Upstream moved the Go CLI into a monorepo subdirectory at v2.101.0.
+  sourceRoot = "${src.name}/apps/cli-go";
+
+  vendorHash = "sha256-O+dFhk+JLKs+hqxh/6VHDTxZ/TBUl4LBGEuFBHgAyS8=";
+
+  subPackages = [ "." ];
 
   ldflags = [
     "-s"
@@ -31,7 +36,6 @@ buildGoModule rec {
   nativeBuildInputs = [ installShellFiles ];
 
   postInstall = ''
-    rm $out/bin/{docs,listdep}
     mv $out/bin/{cli,supabase}
 
     installShellCompletion --cmd supabase \
@@ -39,8 +43,6 @@ buildGoModule rec {
       --fish <($out/bin/supabase completion fish) \
       --zsh <($out/bin/supabase completion zsh)
   '';
-
-  excludedPackages = [ "pkg" "fsevents" ];
 
   passthru = {
     tests.version = testers.testVersion {
