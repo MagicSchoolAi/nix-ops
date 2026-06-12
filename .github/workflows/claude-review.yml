@@ -93,9 +93,9 @@ jobs:
           # The code-review plugin provides a deterministic multi-agent pipeline
           # with confidence-based filtering. Only high-confidence issues are
           # posted as inline comments, keeping noise low.
-          plugin_marketplaces: "https://github.com/anthropics/claude-plugins-official.git"
-          plugins: "code-review@claude-plugins-official"
-          prompt: "/code-review:code-review --comment"
+          plugin_marketplaces: 'https://github.com/anthropics/claude-plugins-official.git'
+          plugins: 'code-review@claude-plugins-official'
+          prompt: '/code-review:code-review --comment'
           additional_permissions: |
             actions: read
           claude_args: |
