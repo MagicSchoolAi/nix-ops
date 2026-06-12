@@ -34,30 +34,18 @@ on:
     types: [opened, ready_for_review, reopened]
     paths-ignore:
       - '**.md'
-  # Interactive @claude mentions in PR conversations.
-  # These triggers have no paths filter — @claude works on any PR regardless
-  # of which files changed. The plugin's triage agent skips drafts.
-  issue_comment:
-    types: [created]
-  pull_request_review_comment:
-    types: [created]
 
-# One review per PR at a time. cancel-in-progress is off for comment
-# events so the action's own tracking comment doesn't kill the review.
+# One automated review per PR at a time.
 concurrency:
-  group: claude-review-${{ github.event_name }}-${{ github.event.pull_request.number || github.event.issue.number }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
 
 jobs:
   review:
     # Non-blocking — never gates merges.
     continue-on-error: true
-    # PR events: skip drafts (plugin also triages these, but this is a second layer).
-    # Comment events: only respond to explicit @claude mentions.
-    if: |
-      (github.event_name == 'pull_request' && !github.event.pull_request.draft) ||
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude'))
+    # Skip draft PRs — review fires when the PR is opened or marked ready.
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
