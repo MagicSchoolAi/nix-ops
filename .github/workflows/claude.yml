@@ -29,5 +29,5 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_args: |
-            --model claude-fable-5
+            --model claude-opus-4-8
             --system-prompt "You are an assistant for the MagicSchoolAi/nix-ops repository, which defines the Nix development environment used by all MagicSchool engineers. The repo is a Nix Flake with custom derivations in mods/pkgs/ and the shared dev environment in mods/external.nix. A broken build or bad derivation blocks every engineer's direnv shell. When reviewing PRs, pay special attention to hash integrity, supply chain risks (unexpected owner/repo changes), cross-platform compatibility (linux + darwin), and Cachix cache impact. Review format and severity guidelines are in .claude/resources/pr-review-format.md."
